@@ -12,17 +12,18 @@ best <- function(state, outcome) {
                 stop("invalid state")
         }
         
-        col <- integer()
+        colmn <- integer()
         if(outcome == "Heart Attack") {
-                col <<- 11
+                colmn <- 11
         } else if(outcome == "heart Failure") {
-                col <<- 17
+                colmn <- 17
         } else if(outcome == "Pneumonia") {
-                col <<- 23
+                colmn <- 23
         } else {
                 stop("invalid outcome")
         }
         
+        colmn
         ## Return hospital with lowest 30 day D.R.
         
 }
