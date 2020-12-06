@@ -6,8 +6,9 @@ best <- function(state, outcome) {
         dat <- read.csv("data/outcome-of-care-measures.csv")
         
         ## Check if state and outcome are valid inputs.
-        stateExist <- sum(as.numeric(lapply(dat[, 7], function(x) x == state)))
-        if(stateExist >= 1) {
+        stateExist <- as.logical(lapply(dat[, 7], function(x) x == state))
+        stExCheck <- sum(as.numeric(stateExist))
+        if(stExCheck >= 1) {
         } else {
                 stop("invalid state")
         }
@@ -23,7 +24,19 @@ best <- function(state, outcome) {
                 stop("invalid outcome")
         }
         
-        colmn
         ## Return hospital with lowest 30 day D.R.
-        
+        subDat <- dat[stateExist, c(2, colmn)]
+        Good <- as.logical(lapply(subDat[, 2], function(x) x != "Not Available"))
+        subDatFix <- subDat[Good,]
+        mortRats <- as.numeric(subDatFix[, 2])
+        curmin <- 100
+        x <- 1
+        for(i in 1:length(mortRats)) {
+                if (curmin > mortRats[i]) {
+                        curmin <- mortRats[i]
+                        x <- i
+                }
+        }
+        name <- subDatFix[x, 1]
+        name
 }
