@@ -30,6 +30,11 @@ rankhospital <- function(state, outcome, num = "best") {
         subDatFix <- subDat[Good,]
         ord <- order(as.numeric(subDatFix[, 2]), subDatFix[, 1], decreasing = FALSE)
         subDatFix <- subDatFix[ord, ]
+        if(num == "best") {
+                num <- 1
+        } else if(num == "worst") {
+                num <- length(ord)
+        }
         name <- subDatFix[num, 1]
         name
 }
