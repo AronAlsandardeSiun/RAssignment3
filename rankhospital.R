@@ -2,10 +2,10 @@
 
 ## Returns hospital with given rank from ordered list of mortlity fo condition
 rankhospital <- function(state, outcome, num = "best") {
-        ## Read outcome data.
+        
         dat <- read.csv("data/outcome-of-care-measures.csv")
   
-        ## Check if state and outcome are valid inputs.
+        
         stateExist <- as.logical(lapply(dat[, 7], function(x) x == state))
         stExCheck <- sum(as.numeric(stateExist))
         if(stExCheck >= 1) {
@@ -14,17 +14,17 @@ rankhospital <- function(state, outcome, num = "best") {
         }
   
         colmn <- integer()
-        if(outcome == "Heart Attack") {
+        if(outcome == "heart attack") {
                 colmn <- 11
-        } else if(outcome == "heart Failure") {
+        } else if(outcome == "heart failure") {
                 colmn <- 17
-        } else if(outcome == "Pneumonia") {
+        } else if(outcome == "pneumonia") {
                 colmn <- 23
         } else {
                 stop("invalid outcome")
         }
         
-        ## Return hospital name in that state with the given rank
+        
         subDat <- dat[stateExist, c(2, colmn)]
         Good <- as.logical(lapply(subDat[, 2], function(x) x != "Not Available"))
         subDatFix <- subDat[Good,]
