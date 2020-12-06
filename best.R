@@ -28,6 +28,8 @@ best <- function(state, outcome) {
         subDat <- dat[stateExist, c(2, colmn)]
         Good <- as.logical(lapply(subDat[, 2], function(x) x != "Not Available"))
         subDatFix <- subDat[Good,]
+        ord <- sort.list(subDatFix[,1], decreasing = FALSE)
+        subDatFix <- subDatFix[ord, ]
         mortRats <- as.numeric(subDatFix[, 2])
         curmin <- 100
         x <- 1
